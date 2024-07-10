@@ -1,0 +1,76 @@
+/* _______________  navbar CSS____________________   */
+.navbar {
+    height: 79px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FFFFFF;
+    padding: 10px;
+    color: white;
+    width: 100%;
+  }
+/* _______________  navbar CSS____________________   */
+
+  
+/*  _________________Logo CSS ____________________  */
+  .logo {
+    margin-left: 79px;
+    text-align: center;
+  }
+  
+  .logo img {
+    width: 192.15px;
+    height:48.28px;
+  } 
+/*  __________________ Logo CSS ____________________  */
+  
+/* ____________________Navigation Bar Links Home/AboutUs/Resources/FAQs ____________________ */
+  .nav-links {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    list-style: none;
+    gap:25px;
+    color: #000000;
+    cursor: pointer;
+  }
+  .nav-links  :hover{
+    color:#0163FD;
+    transition: 0.5s;
+  }
+  .nav-links .active{
+    color: #0163FD;
+  }
+/* ____________________Navigation Bar Links Home/AboutUs/Resources/FAQs____________________ */
+  
+/* ____________________Navigation Bar Buttons login and signup ____________________*/
+  .nav-buttons {
+    display: flex;
+    gap: 15px;
+    margin-right: 68px;
+    /* padding: 10px 10px; */
+  }
+  
+/* ____________________Media Queries for Responsiveness ____________________*/
+  @media (max-width: 992px) {
+      .navbar {
+          flex-direction: column;
+          height: auto;
+      }
+  
+      .logo {
+          margin-left: 0;
+          margin-bottom: 7px;
+      }
+  
+      .nav-links {
+          justify-content: center;
+          gap: 20px;
+      }
+  
+      .nav-buttons {
+          margin-right: 0;
+          margin-top: 10px;
+      }
+  }
+  
