@@ -1,5 +1,6 @@
 /* _______________  navbar CSS____________________   */
 .navbar {
+    position: static;
     height: 79px;
     display: flex;
     align-items: center;

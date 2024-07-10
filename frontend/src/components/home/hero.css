@@ -6,11 +6,14 @@
     left: 0px;
     top: 85px;
 }
+
+/* ________________________Left side of HERO _______________________________________*/
 .hero_left {
     display: flex;
     flex-direction: column;
     width: 609px;
 }
+
 .topHeading {
     margin-left: 100px;
     margin-top: 121px;
@@ -24,13 +27,13 @@
 
 .Find_Perfect_Path {
     margin-left: 100px;
-    /* width: 7; */
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
     font-size: 76.1986px;
     line-height: 129%;
 }
+
 .content {
     margin-left: 100px;
     margin-top: 25px;
@@ -39,14 +42,42 @@
     font-weight: 500;
     font-size: 22.4113px;
     line-height: 34px;
-
     color: #080707;
 }
-img{
+
+img {
     width: 264.64px;
     height: 264.64px;
 }
-.hero_right{
+
+.learn {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+.Learn_More {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.Learn_More .play {
+    align-content: center;
+    padding-left: 14px;
+    padding-right: 14px;
+
+}
+
+.play_button {
+    width: 13px;
+    height: 15px;
+}
+
+/* _______________________Right side of HERO______________________________________________ */
+.hero_right {
     margin-left: 178px;
     margin-right: 100px;
     margin-top: 52px;
@@ -54,58 +85,44 @@ img{
     gap: 25px;
     flex-direction: column;
 }
-.upperimage{
-    display:flex;
-    flex-direction: row;
-    gap: 25px;
-}
-.lowerimage{
-    display: flex;
-    gap: 25px;
-    flex-direction: row;
-}
-.learn{
-    display: flex;
-    gap: 50px;
-    align-items: center;
-    margin-left: 100px ;
-    margin-top: 50px;
-}
-.Learn_More{
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-.Learn_More .play{
-     align-content: center;  
-    padding-left: 14px;
-    padding-right: 14px;
 
+.upperimage {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
 }
-.play_button {
-    width: 13px;
-    height: 15px;
-  }
-  
-@media (max-width: 1265px){
-    .upperimage{
-        display:flex;
+
+.lowerimage {
+    display: flex;
+    gap: 25px;
+    flex-direction: row;
+}
+
+
+/* _________________________________Media Queries__________________________________________ */
+@media (max-width: 1265px) {
+    .upperimage {
+        display: flex;
         flex-direction: column;
         gap: 25px;
     }
-    .lowerimage{
+
+    .lowerimage {
         display: none;
     }
 }
-@media (max-width: 1000px){
-    .hero_right{
+
+@media (max-width: 1000px) {
+    .hero_right {
         display: none;
     }
+
     .hero_left {
         display: flex;
         flex-direction: column;
         width: 100%;
     }
+
     .topHeading {
         margin-left: 100px;
         margin-top: 105px;
@@ -117,20 +134,13 @@ img{
         color: #C67336;
     }
 }
-@media (max-width: 994px){
-    .hero{
+
+@media (max-width: 994px) {
+    .hero {
         height: 46%;
     }
-    .hero_left{
+
+    .hero_left {
         margin-right: 10%;
     }
 }
-
-
-
-
-
-
-
-
-  
