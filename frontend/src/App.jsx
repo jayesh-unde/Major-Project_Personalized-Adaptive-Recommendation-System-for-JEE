@@ -8,8 +8,9 @@ const App = () => {
   return (
     <BrowserRouter>
       <MainLayout/>
-      <FocusedSubjects/>
-      <Benefits/>                    
+      {/* <FocusedSubjects/>
+      <Benefits/>                     */}
+      
 
     </BrowserRouter>
   )
