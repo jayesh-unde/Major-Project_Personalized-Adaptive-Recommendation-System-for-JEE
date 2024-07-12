@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setAuth } from '../../store/authSlice';
 import { logout } from '../../http';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../../components/shared/Navigation/Footer/Footer'
 const MainLayout = () => {
   const[isOpen ,setIsOpen] = useState(true);
   const toggle = () => setIsOpen(!isOpen)
@@ -24,12 +25,13 @@ const MainLayout = () => {
     }
   return (
     <>
-      <Sidebar isOpen={isOpen} toggle={toggle}/>
+      <Sidebar isOpen={isOpen} toggle={toggle} logout={logoutUser}/>
       <div className={styles.mainSection} style={{marginLeft: isOpen?"300px":"100px", transition: "1s"}}>
         <HomeAfter/>
       </div>
+
     </>
   )
 }
 
-export default MainLayout
+export default MainLayout;

@@ -15,7 +15,7 @@
     color: #555555;
     height: 100vh;
     width: 200px;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.2s ease-in-out;
     box-shadow: 10px 0px 15px -5px rgba(0, 0, 0, 0.3);
 
 }
@@ -37,7 +37,7 @@
     color: #555555;
     padding: 10px 15px;
     margin-right: 10%;
-    height: 25px;
+    height: 45px;
     gap: 25px;  
     border-radius: 0.3rem;
     text-decoration: none;
@@ -48,12 +48,6 @@
 .link:hover{
     background:#E9F5FE;
     color: #0C7FDA;
-    padding: 10px 15px;
-    margin-right: 10%;
-    height: 25px;
-    gap: 25px;  
-    border-radius: 0.3rem;
-    text-decoration: none;
 }
 .active{
     background: #E9F5FE;
@@ -72,7 +66,7 @@
     color: white;
     padding: 10px 15px;
     margin-right: 10%;
-    height: 25px;
+    height: 45px;
     gap: 25px;  
     border-radius: 0.3rem;
     text-decoration: none;
