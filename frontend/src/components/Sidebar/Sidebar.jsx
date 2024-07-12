@@ -7,7 +7,7 @@ import { IoMdSettings } from "react-icons/io";
 import { IoLogOut } from "react-icons/io5";
 import { NavLink } from 'react-router-dom';
 import styles from "./Sidebar.module.css";
-const Sidebar = ({isOpen, toggle}) => {
+const Sidebar = ({isOpen, toggle, logout}) => {
     const menuItem=[
         {
             path:"/",
@@ -63,7 +63,7 @@ const Sidebar = ({isOpen, toggle}) => {
                }
 
                {/* logout  */}
-               <NavLink key="8" className={styles.logout}>
+               <NavLink key="8" className={styles.logout} onClick={logout}>
                   <div className={styles.icon}><IoLogOut/></div>
                   <div style={{display: isOpen ? "block" : "none"}} className={styles.link_text}>Logout</div>
               </NavLink>
