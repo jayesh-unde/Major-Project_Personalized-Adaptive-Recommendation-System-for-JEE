@@ -6,7 +6,7 @@ import HomeAfter from '../../pages/HomeAfter/HomeAfter'
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuth } from '../../store/authSlice';
 import { logout } from '../../http';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Outlet} from 'react-router-dom';
 import Footer from '../../components/shared/Navigation/Footer/Footer'
 const MainLayout = () => {
   const[isOpen ,setIsOpen] = useState(true);
@@ -27,9 +27,8 @@ const MainLayout = () => {
     <>
       <Sidebar isOpen={isOpen} toggle={toggle} logout={logoutUser}/>
       <div className={styles.mainSection} style={{marginLeft: isOpen?"300px":"100px", transition: "1s"}}>
-        <HomeAfter/>
+        <Outlet/>
       </div>
-
     </>
   )
 }
