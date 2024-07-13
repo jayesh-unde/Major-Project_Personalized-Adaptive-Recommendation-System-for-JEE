@@ -9,6 +9,7 @@ import { useLoadingWithRefresh } from './hooks/useLoadingWithRefresh';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MainLayout from './layouts/MainLayout/MainLayout';
+import Profile from './pages/Profile/Profile';
 
 function App() {
   const { loading } = useLoadingWithRefresh();
@@ -19,10 +20,15 @@ function App() {
   ) : (
     <BrowserRouter>
       <Routes>
-        <Route
+      <Route
           path="/"
           element={auth ? <MainLayout /> : <HomeBefore />}
-        />
+        >
+          <Route index element={<HomeAfter />} />
+          <Route path="profile/:username" element={<Profile />} />
+          <Route path="*" element={<Navigate to="/" />} />
+
+        </Route>
         <Route
           path="/authenticate"
           element={<Authenticate />}

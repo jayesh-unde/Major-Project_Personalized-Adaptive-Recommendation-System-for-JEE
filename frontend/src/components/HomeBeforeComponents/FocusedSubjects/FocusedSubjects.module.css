@@ -15,6 +15,7 @@
 .subjectsContainer{
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
     margin: 30px 10px;
     padding: 30px;
     gap: 30px;
@@ -23,8 +24,8 @@
     border: 0.5px solid rgb(197, 197, 197);
     padding: 20px 30px;
     display: flex;
-    width: 240px;
-    height: 60px;
+    width: 300px;
+    height: 100px;
     border-radius: 10px;
     box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.5);
 }

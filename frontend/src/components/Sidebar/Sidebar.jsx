@@ -6,8 +6,12 @@ import { MdAnalytics } from "react-icons/md";
 import { IoMdSettings } from "react-icons/io";
 import { IoLogOut } from "react-icons/io5";
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styles from "./Sidebar.module.css";
-const Sidebar = ({isOpen, toggle}) => {
+const Sidebar = ({isOpen, toggle,logout}) => {
+
+    const {user} = useSelector((state)=> state.auth);
+
     const menuItem=[
         {
             path:"/",
@@ -20,7 +24,7 @@ const Sidebar = ({isOpen, toggle}) => {
             icon:<FaBook/>
         },
         {
-          path:"/profile",
+          path:`/profile/${user.name}`,
           name:"Profile",
           icon:<FaUserAlt/>
         },
@@ -63,7 +67,7 @@ const Sidebar = ({isOpen, toggle}) => {
                }
 
                {/* logout  */}
-               <NavLink key="8" className={styles.logout}>
+               <NavLink onClick={logout} key="8" className={styles.logout}>
                   <div className={styles.icon}><IoLogOut/></div>
                   <div style={{display: isOpen ? "block" : "none"}} className={styles.link_text}>Logout</div>
               </NavLink>
