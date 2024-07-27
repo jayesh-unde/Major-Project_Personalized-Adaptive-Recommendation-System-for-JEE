@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import HomeBefore from './pages/HomeBefore/HomeBefore';
 import HomeAfter from './pages/HomeAfter/HomeAfter';
 import Profile from './pages/Profile/Profile';
+import Progress from './pages/Progress/Progress';
 import Authenticate from './pages/Authenticate/Authenticate';
 import { useLoadingWithRefresh } from './hooks/useLoadingWithRefresh';
 // import Loader from './components/shared/Loader/Loader';
@@ -27,6 +28,7 @@ function App() {
         >
           <Route index element={<HomeAfter />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="progress" element={<Progress />} />
           <Route path="*" element={<Navigate to="/" />} />
 
         </Route>
