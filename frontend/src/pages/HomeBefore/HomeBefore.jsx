@@ -24,9 +24,9 @@ const HomeBefore = () => {
       <Navigation login={handleLoginClick} register={handleSignupClick}/>
       <Hero/>
       <News/>
-      <CommunityHub/>
       <FocusedSubjects/>
       <Benefits/>
+      <CommunityHub/>
       <Footer/>
     </div>
   );
