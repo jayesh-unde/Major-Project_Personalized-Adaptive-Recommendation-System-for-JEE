@@ -2,7 +2,6 @@ import React from 'react';
 import Chart from 'react-apexcharts';
 
 const linecharts = ({ subject }) => {
-  // Define all series data for each subject
   const seriesData = {
     Physics: [{
       name: "Physics",
@@ -18,7 +17,6 @@ const linecharts = ({ subject }) => {
     }],
   };
 
-  // Get the data for the current subject, or an empty array if the subject is not found
   const chartSeries = seriesData[subject] || [];
 
   return (

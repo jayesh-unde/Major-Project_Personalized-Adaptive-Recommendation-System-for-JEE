@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './subjectlayout.module.css'; // Import the CSS module
+import styles from './subjectlayout.module.css'; 
 
 const SubjectLayout = ({ setSelectedSubject }) => {
   const menuItem = [
@@ -8,7 +8,6 @@ const SubjectLayout = ({ setSelectedSubject }) => {
     { name: "Mathematics" },
   ];
 
-  // Handle dropdown change event
   const handleChange = (event) => {
     setSelectedSubject(event.target.value);
   };
