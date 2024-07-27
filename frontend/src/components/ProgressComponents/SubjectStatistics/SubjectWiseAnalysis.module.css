@@ -1,0 +1,10 @@
+.mainContainer{
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0px;
+    
+}
+
+.mainContainer .subContainer{
+    width: 100%;
+}
