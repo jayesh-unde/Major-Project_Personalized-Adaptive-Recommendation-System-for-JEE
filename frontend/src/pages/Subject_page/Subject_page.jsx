@@ -3,10 +3,9 @@ import styles from './Subject_page.module.css'
 import { useSelector } from 'react-redux'
 import Linecharts from '../../components/SubjectPageComponents/TimeSpentcharts/linecharts'
 import Donutchart from '../../components/SubjectPageComponents/ProgressDonutchart/Donutchart'
-import RecommendationCard from '../../components/RecommendationCard/RecommendationCard'
+import RecommendationCard from '../../components/SubjectPageComponents/SubjectCard/Subjectcard'
 import SubjectLayout from '../../components/SubjectPageComponents/TimeSpentcharts/subjectlayout'
 import { TbMathSymbols } from "react-icons/tb";
-
 const Subject_page = () => {
   const [selectedSubject, setSelectedSubject] = useState("Physics");
   const { user } = useSelector((state) => state.auth);
@@ -17,9 +16,9 @@ const Subject_page = () => {
         <p className={styles.slogan}>Unleash Your Potential with JEECode</p>
       </div>
       <div className={styles.cardContainer}>
-          <RecommendationCard color="#0163FD" icon={TbMathSymbols}/>
-          <RecommendationCard color="#FD0101" icon={TbMathSymbols}/>
-          <RecommendationCard color="#FD9801" icon={TbMathSymbols}/>
+        <RecommendationCard color="#0163FD" subject="Physics" icon={TbMathSymbols} />
+        <RecommendationCard color="#FD0101" subject="Chemistry" icon={TbMathSymbols} />
+        <RecommendationCard color="#FD9801" subject="Mathematics" icon={TbMathSymbols} />
       </div>
       <div className={styles.questionattempted}>
         <Donutchart subject="Physics"
@@ -30,8 +29,8 @@ const Subject_page = () => {
           section={{ color1: '#9BDFC4', color2: '#62B2FD' }} />
       </div>
       <div className={styles.timespentcharts}>
-      <SubjectLayout setSelectedSubject={setSelectedSubject}  />
-      <Linecharts subject={selectedSubject} className={styles.linechart}/>
+        <SubjectLayout setSelectedSubject={setSelectedSubject} />
+        <Linecharts subject={selectedSubject} />
       </div>
     </div>
   )
