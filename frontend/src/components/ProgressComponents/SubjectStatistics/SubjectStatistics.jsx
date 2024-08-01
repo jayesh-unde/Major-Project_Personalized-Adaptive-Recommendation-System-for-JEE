@@ -2,22 +2,22 @@ import React, { useState } from 'react';
 import SubjectWiseAnalysis from './SubjectWiseAnalysis';
 import styles from './SubjectStatistics.module.css'
 
-function SubjectStatistics({userInfo}) {
+function SubjectStatistics({userInfo, extraInfo}) {
     const [selectedComponent, setSelectedComponent] = useState('Physics');
 
     const renderComponent = ({userInfo}) => {
         switch (selectedComponent) {
             case 'Mathematics':
-                return <SubjectWiseAnalysis subject={'Mathematics'} userInfo={userInfo} />;
+                return <SubjectWiseAnalysis subject={'Mathematics'} userInfo={userInfo} extraInfo={extraInfo} />;
             case 'Chemistry':
-                return <SubjectWiseAnalysis subject={'Chemistry'} userInfo={userInfo}/>;
+                return <SubjectWiseAnalysis subject={'Chemistry'} userInfo={userInfo} extraInfo={extraInfo}/>;
             default:
-                return <SubjectWiseAnalysis subject={'Physics'} userInfo={userInfo}/>;
+                return <SubjectWiseAnalysis subject={'Physics'} userInfo={userInfo} extraInfo={extraInfo} />;
         }
     };
   return (
     <div>
-        <h2 style={{margin:"0 0 15px 0"}}>Subject Wise Analysis</h2>
+        {extraInfo?"":<h2 style={{margin:"0 0 15px 0"}}>Subject Wise Analysis</h2>}
         <div className={styles.toggleContainer}>
             <button 
                 onClick={() => setSelectedComponent('Physics')} 
