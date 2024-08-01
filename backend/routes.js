@@ -1,5 +1,6 @@
 const authController = require('./controllers/auth-controller');
-const authMiddlewares = require('./middlewares/authMiddlewares')
+const authMiddlewares = require('./middlewares/authMiddlewares');
+const dataController = require('./controllers/data-controller');
 const router = require('express').Router();
 
 // authentication routes
@@ -10,6 +11,6 @@ router.get('/api/refresh',authController.refresh); // to refresh the access toke
 router.post('/api/login-email',authController.loginEmail);
 router.post('/api/logout',authMiddlewares,authController.logout);
 router.post('/api/google-login', authController.googleLogin);
-
+router.post('/api/get-topics',dataController.getChapterData);
 
 module.exports = router;
