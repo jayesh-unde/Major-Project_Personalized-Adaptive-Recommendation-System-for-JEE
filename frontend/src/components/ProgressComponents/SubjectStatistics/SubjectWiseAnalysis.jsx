@@ -1,8 +1,21 @@
 import React from 'react'
 import DoughnutChart from '../DoughnutChart/DoughnutChart'
 import styles from './SubjectWiseAnalysis.module.css'
-function SubjectWiseAnalysis({ subject, userInfo }) {
+import RecommendationCard from '../../RecommendationCard/RecommendationCard';
+import { TbMathIntegralX } from "react-icons/tb";
+import { SlChemistry } from "react-icons/sl";
+import { SiReactos } from "react-icons/si";
+import { useNavigate } from 'react-router-dom';
+import { FaArrowCircleRight } from "react-icons/fa";
+
+function SubjectWiseAnalysis({ subject, userInfo,extraInfo }) {
+    const navigate = useNavigate();
+
     const subjectData = subject=='Physics'?userInfo.physics:subject=='Chemistry'?userInfo.chemistry:userInfo.mathematics; 
+    const onTopicClick = ()=>{
+        console.log(subject,"clicked")
+        navigate('/section/Physics');
+    } 
 
     const easy = subjectData.easy
     const medium = subjectData.medium 
@@ -10,14 +23,14 @@ function SubjectWiseAnalysis({ subject, userInfo }) {
     const data = [easy, medium,hard]
 
     const currectQuestions = subjectData.solvedQuestions.length 
-    const attempedQuestions = subjectData.attempedQuestions.length 
     const incorrectQuestions = subjectData.incorrectQuestions.length
 
-    const totalSubmissions = currectQuestions + attempedQuestions + incorrectQuestions 
+    const totalSubmissions = currectQuestions + incorrectQuestions;
     const accuracy = (currectQuestions / totalSubmissions)*100
 
     return (
-        <div className={styles.mainContainer}>
+        
+            <div className={styles.mainContainer}>
             <div className={styles.subContainer}>
                 <DoughnutChart
                     title={subject}
@@ -38,9 +51,33 @@ function SubjectWiseAnalysis({ subject, userInfo }) {
                     }}
                 />
             </div>
-
             <div className={styles.subContainer}>
-                Some Extra Info
+            {!extraInfo?"":
+                    <div className={styles.extraInfo}>
+                        <button 
+                            onClick={onTopicClick} 
+                            className={styles.topicButton}>
+                                Continue {subject} journey 
+                                <span style={{fontSize:"20px", marginLeft:"10px", paddingTop:"5px"}}>
+                                    <FaArrowCircleRight/>
+                                </span>
+                        </button>
+                        <RecommendationCard 
+                            color="#0163FD" 
+                            icon={TbMathIntegralX}
+                            recommendedText="Projectile Motion"
+                            subject={subject}
+                            context="Topic"
+                        />
+                        <RecommendationCard 
+                            color="#FD9801" 
+                            icon={SiReactos}
+                            recommendedText="Kinematics"
+                            subject={subject}
+                            context="Chapter"
+                        />
+                    </div>
+                    }  
             </div>
         </div>
     )

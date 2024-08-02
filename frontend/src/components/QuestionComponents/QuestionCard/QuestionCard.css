@@ -1,3 +1,4 @@
+/* QuestionCard.css */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
 
 .question-card {
@@ -19,6 +20,28 @@
   z-index: 10;
   padding-bottom: 10px;
   flex-wrap: wrap; /* Allow wrapping for icons */
+}
+
+.difficulty-tag {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  margin-right: 8px;
+}
+
+.difficulty-tag.easy {
+  background-color: #28a745; /* Green for easy */
+}
+
+.difficulty-tag.medium {
+  background-color: #ffc107; /* Yellow for medium */
+}
+
+.difficulty-tag.hard {
+  background-color: #dc3545; /* Red for hard */
 }
 
 .question-header h1 {
@@ -57,6 +80,7 @@
   .question-content p {
     font-size: 12px;
   }
+
   .question-icons {
     display: flex;
     gap: 5px; /* Adjust gap */
@@ -67,13 +91,4 @@
     width: 15px;
     height: 15px;
   }
-  .question-card {
-    background-color: white;
-    padding: 20px;
-    font-family: 'Poppins', sans-serif;
-    height: inherit;
-    display: flex;
-    flex-direction: column;
-  }
 }
-

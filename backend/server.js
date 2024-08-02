@@ -25,7 +25,7 @@ const corsOption = {
 };
 app.use(cors(corsOption));
 app.use(cookieParser());
-
+app.use(bodyParser.json());
 app.use(express.json({ limit: '8mb' })); // size of file
 app.use(router);
 

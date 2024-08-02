@@ -43,3 +43,23 @@
     font-size: 16px;
     color: white;
 }
+.recommendedTopic{
+    font-size: 16px;
+    font-weight: bold;
+}
+.topicButton{
+    display: flex;
+    margin-top: 10px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    background-color: white;
+    box-shadow: -5px 5px 10px 1px rgba(0, 0, 0, 0.5);
+}
+.topicButton:hover{
+    box-shadow: -5px 5px 10px 1px rgba(0, 0, 0, 0.9);
+}

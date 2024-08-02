@@ -19,7 +19,12 @@ export const loginEmail = (data)=> api.post('/api/login-email',data);
 export const verifyOtp = (data)=>api.post('/api/verify-otp',data);
 export const logout = () => api.post('/api/logout');
 export const googleLogin = (data) => api.post('/api/google-login', data);
-
+export const findTopics = (data) => api.post('/api/questions/find-topics', data);
+export const findFirstQuestionByTopic = (data) => api.post('/api/find-first-question', data);
+export const findQuestionById = (data) => api.post('/api/find-question-by-id', data);
+export const nextQuestion = (data) => api.post('/api/next-question',data);
+export const checkAnswer = (data) => api.post('/api/check-answer',data);
+export const findUserInfo = (data) => api.post('/api/find-user-info', data);
 
 api.interceptors.response.use(
     (config) => {

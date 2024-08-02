@@ -137,3 +137,12 @@
     border-radius: 15px;
   }
   
+  .subjectStatistics{
+    background-color: white;
+    border-radius: 5px;
+    width: 95%;
+    padding: 20px;
+    box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.3);
+    max-width: 1400px;
+    margin: 10px 0px;
+  }

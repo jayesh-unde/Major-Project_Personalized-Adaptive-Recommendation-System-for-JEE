@@ -14,6 +14,7 @@ import Profile from './pages/Profile/Profile';
 import QuestionPage from './pages/QuestionPage/QuestionPage';
 import SubjectPage from './pages/SubjectPage/SubjectPage';
 import SectionPage from './pages/SectionPage/SectionPage';
+import TopicPage from './pages/TopicPage/TopicPage';
 function App() {
   const { loading } = useLoadingWithRefresh();
   const { auth } = useSelector((state) => state.auth);
@@ -31,10 +32,12 @@ function App() {
           <Route path="profile/:username" element={<Profile />} />
           <Route path="progress" element={<Progress />} />
           <Route path="subject" element={<SubjectPage />} />
+          <Route path="/chapters/:chapterName" element={<TopicPage />} />
+          
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="/section/:subjectName" element={<SectionPage />} />
         </Route>
-        <Route path="questions" element={<QuestionPage />} />
+        <Route path="/Kinematics/:questionId" element={<QuestionPage />} />
         <Route
           path="/authenticate"
           element={<Authenticate />}
