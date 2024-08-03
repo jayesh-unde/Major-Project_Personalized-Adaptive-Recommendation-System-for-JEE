@@ -81,7 +81,7 @@ class AuthController {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                 domain: 'jeecode.onrender.com', // Frontend domain
+                 domain: 'major-project-backend-fvde.onrender.com', // Frontend domain
                  sameSite: 'None'
             });
     
@@ -89,7 +89,7 @@ class AuthController {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                domain: 'jeecode.onrender.com', // Frontend domain
+                domain: 'major-project-backend-fvde.onrender.com', // Frontend domain
                  sameSite: 'None'
             });
     
@@ -145,7 +145,7 @@ class AuthController {
             maxAge: 1000 * 60 * 60 * 24 * 30,
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            domain: 'jeecode.onrender.com', // Frontend domain
+            domain: 'major-project-backend-fvde.onrender.com', // Frontend domain
                  sameSite: 'None'
         });
     
@@ -153,7 +153,7 @@ class AuthController {
             maxAge: 1000 * 60 * 60 * 24 * 30,
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            domain: 'jeecode.onrender.com', // Frontend domain
+            domain: 'major-project-backend-fvde.onrender.com', // Frontend domain
                  sameSite: 'None'
         });
     
@@ -188,7 +188,7 @@ async loginEmail(req, res) {
             maxAge: 1000 * 60 * 60 * 24 * 30,
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            domain: 'jeecode.onrender.com', // Frontend domain
+            domain: 'major-project-backend-fvde.onrender.com', // Frontend domain
                  sameSite: 'None'
         });
 
@@ -196,7 +196,7 @@ async loginEmail(req, res) {
             maxAge: 1000 * 60 * 60 * 24 * 30,
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            domain: 'jeecode.onrender.com', // Frontend domain
+            domain: 'major-project-backend-fvde.onrender.com', // Frontend domain
                  sameSite: 'None'
         });
 
@@ -252,7 +252,7 @@ async googleLogin(req, res) {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                domain: 'jeecode.onrender.com', // Frontend domain
+                domain: 'major-project-backend-fvde.onrender.com', // Frontend domain
                  sameSite: 'None'
             });
 
@@ -260,7 +260,7 @@ async googleLogin(req, res) {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                domain: 'jeecode.onrender.com', // Frontend domain
+                domain: 'major-project-backend-fvde.onrender.com', // Frontend domain
                  sameSite: 'None'
             });
 
@@ -275,7 +275,7 @@ async googleLogin(req, res) {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                domain: 'jeecode.onrender.com', // Frontend domain
+                domain: 'major-project-backend-fvde.onrender.com', // Frontend domain
                  sameSite: 'None'
             });
 
@@ -283,7 +283,7 @@ async googleLogin(req, res) {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                domain: 'jeecode.onrender.com', // Frontend domain
+                domain: 'major-project-backend-fvde.onrender.com', // Frontend domain
                  sameSite: 'None'
             });
 
