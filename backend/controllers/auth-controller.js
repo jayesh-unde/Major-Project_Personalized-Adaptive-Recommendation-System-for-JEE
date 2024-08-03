@@ -80,6 +80,7 @@ class AuthController {
             res.cookie('refreshToken', refreshToken, {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
                  domain: 'jeecode.onrender.com', // Frontend domain
                  sameSite: 'None'
             });
@@ -87,6 +88,7 @@ class AuthController {
             res.cookie('accessToken', accessToken, {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
                 domain: 'jeecode.onrender.com', // Frontend domain
                  sameSite: 'None'
             });
@@ -142,6 +144,7 @@ class AuthController {
         res.cookie('refreshToken', refreshToken, {
             maxAge: 1000 * 60 * 60 * 24 * 30,
             httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
             domain: 'jeecode.onrender.com', // Frontend domain
                  sameSite: 'None'
         });
@@ -149,6 +152,7 @@ class AuthController {
         res.cookie('accessToken', accessToken, {
             maxAge: 1000 * 60 * 60 * 24 * 30,
             httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
             domain: 'jeecode.onrender.com', // Frontend domain
                  sameSite: 'None'
         });
@@ -183,6 +187,7 @@ async loginEmail(req, res) {
         res.cookie('refreshToken', refreshToken, {
             maxAge: 1000 * 60 * 60 * 24 * 30,
             httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
             domain: 'jeecode.onrender.com', // Frontend domain
                  sameSite: 'None'
         });
@@ -190,6 +195,7 @@ async loginEmail(req, res) {
         res.cookie('accessToken', accessToken, {
             maxAge: 1000 * 60 * 60 * 24 * 30,
             httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
             domain: 'jeecode.onrender.com', // Frontend domain
                  sameSite: 'None'
         });
@@ -245,6 +251,7 @@ async googleLogin(req, res) {
             res.cookie('refreshToken', refreshToken, {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
                 domain: 'jeecode.onrender.com', // Frontend domain
                  sameSite: 'None'
             });
@@ -252,6 +259,7 @@ async googleLogin(req, res) {
             res.cookie('accessToken', accessToken, {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
                 domain: 'jeecode.onrender.com', // Frontend domain
                  sameSite: 'None'
             });
@@ -266,6 +274,7 @@ async googleLogin(req, res) {
             res.cookie('refreshToken', refreshToken, {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
                 domain: 'jeecode.onrender.com', // Frontend domain
                  sameSite: 'None'
             });
@@ -273,6 +282,7 @@ async googleLogin(req, res) {
             res.cookie('accessToken', accessToken, {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
                 domain: 'jeecode.onrender.com', // Frontend domain
                  sameSite: 'None'
             });
