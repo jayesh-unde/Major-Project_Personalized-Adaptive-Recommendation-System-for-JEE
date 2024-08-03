@@ -19,5 +19,6 @@ router.post('/api/next-question',questionController.getNextQuestion);
 router.post('/api/check-answer',questionController.checkAnswer);
 // router.post('/api/get-topics',dataController.getChapterData);
 router.post('/api/find-user-info', authController.findUserInfo);
+router.post('/api/find-submission-info', questionController.findSubmissionInfo);
 
 module.exports = router;

@@ -25,6 +25,7 @@ export const findQuestionById = (data) => api.post('/api/find-question-by-id', d
 export const nextQuestion = (data) => api.post('/api/next-question',data);
 export const checkAnswer = (data) => api.post('/api/check-answer',data);
 export const findUserInfo = (data) => api.post('/api/find-user-info', data);
+export const findSubmissionInfo = (data) => api.post('/api/find-submission-info', data);
 
 api.interceptors.response.use(
     (config) => {

@@ -192,12 +192,14 @@ async loginEmail(req, res) {
 
 async findUserInfo(req, res) {
     const { username } = req.body;
+
     if (!username) {
         return res.status(400).json({ message: 'Username is required' });
     }
 
     try {
-        const user = await userService.findUser({ username });
+        console.log(username);
+        const user = await userService.findUser({ name: username });
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }

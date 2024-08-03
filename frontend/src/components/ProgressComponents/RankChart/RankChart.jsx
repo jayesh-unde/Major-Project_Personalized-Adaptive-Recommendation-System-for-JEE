@@ -30,15 +30,18 @@ defaults.responsive=true;
 
 
 function RankChart({userInfo}){
-    if(!userInfo || !userInfo.registerDate || !userInfo.ranks){
+  useEffect(() => {
+    console.log(userInfo.createdAt);
+  }, [userInfo]);
+    if(!userInfo || !userInfo.rating){
       return;
     } 
 
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    const startMonth = Number(userInfo.registerDate.substring(5,7))-1
-    const startYear = Number(userInfo.registerDate.substring(0,4))
+    const startMonth = Number(userInfo.createdAt.substring(5,7))-1
+    const startYear = Number(userInfo.createdAt.substring(0,4))
     const labels = []
-    const length = userInfo.ranks.length
+    const length = userInfo.rating.length
     for(let i=0; i<Math.max(12,length); i++){
         let month = (startMonth+i)%12
         labels.push(months[month])
@@ -48,7 +51,7 @@ function RankChart({userInfo}){
         datasets: [
           {
             label: 'Rank',
-            data: userInfo.ranks,
+            data: userInfo.rating,
             borderColor: '#FDB61E',
             backgroundColor: '#FDB61E',
             tension: 0.4, // Cubic interpolation (monotone)

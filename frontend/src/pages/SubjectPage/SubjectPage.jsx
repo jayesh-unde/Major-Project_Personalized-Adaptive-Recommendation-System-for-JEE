@@ -12,8 +12,7 @@ import SubjectStatistics from '../../components/ProgressComponents/SubjectStatis
 const SubjectPage = () => {
   const [selectedSubject, setSelectedSubject] = useState("Physics");
   const { user } = useSelector((state) => state.auth);
-  // const [userInfo, setUserInfo] = useState(null);
-  const userInfo = {
+  const userInformation = {
     registerDate: "2023-10-12T21:42:22Z",
     rating: 320,
     ranks: [900,743,800,610,620,500,340,350,320],
@@ -47,6 +46,24 @@ const SubjectPage = () => {
         hard: 3
     },
   }
+  const [isLoading, setIsLoading] = useState(true);
+  const [userInfo, setUserInfo] = useState(userInformation);
+  useEffect(() => {
+    async function getInfo() {
+      try {
+        const response = await findUserInfo({ username: user.name });
+        console.log(response.data.user);
+        setUserInfo(response.data.user);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+        setIsLoading(false); // Even if there's an error, stop loading
+      }
+    }
+  
+    getInfo();
+  }, [user]);
+  
   return (
     <div className={styles.subjectpagebox}>
       <div className={styles.userWelcome}>

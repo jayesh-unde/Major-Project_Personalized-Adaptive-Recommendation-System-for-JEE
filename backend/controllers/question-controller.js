@@ -67,6 +67,31 @@ class QuestionController {
             res.status(500).json({ message: 'Error fetching next question' });
         }
     }
+
+    async findSubmissionInfo(req,res){
+        try {
+            const { submissionIds } = req.body;
+    
+            const submissions = await SubmissionModel.find({ _id: { $in: submissionIds } })
+                .select('_id timeSpent createdAt totalAttempts questionId')
+                .exec();
+    
+            // Transform the data to match the required format
+            const transformedSubmissions = submissions.map(submission => ({
+                submissionId: submission._id,
+                timeSpent: submission.timeSpent,
+                submissionTimestamp: submission.createdAt,
+                trials: submission.totalAttempts,
+                questionId: submission.questionId
+            }));
+    
+            res.json(transformedSubmissions);
+        } catch (error) {
+            console.error('Error fetching submission info:', error);
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+    }
+
     async checkAnswer(req, res) {
         const { username, questionId, optionSelected, timeSpent } = req.body;
     

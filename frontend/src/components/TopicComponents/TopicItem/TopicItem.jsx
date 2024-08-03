@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './TopicItem.module.css';
 
 const TopicItem = ({ topic,start}) => {
-    const progress= 0;
+    const progress = 0;
     console.log("progress",progress)
     return (
         <div className={styles.topicItem}>
