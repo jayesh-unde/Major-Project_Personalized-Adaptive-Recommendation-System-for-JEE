@@ -80,11 +80,15 @@ class AuthController {
             res.cookie('refreshToken', refreshToken, {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 httpOnly: true,
+                 domain: 'jeecode.onrender.com', // Frontend domain
+                 sameSite: 'None'
             });
     
             res.cookie('accessToken', accessToken, {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 httpOnly: true,
+                domain: 'jeecode.onrender.com', // Frontend domain
+                 sameSite: 'None'
             });
     
             const userdto = new Userdto(user);
@@ -138,11 +142,15 @@ class AuthController {
         res.cookie('refreshToken', refreshToken, {
             maxAge: 1000 * 60 * 60 * 24 * 30,
             httpOnly: true,
+            domain: 'jeecode.onrender.com', // Frontend domain
+                 sameSite: 'None'
         });
     
         res.cookie('accessToken', accessToken, {
             maxAge: 1000 * 60 * 60 * 24 * 30,
             httpOnly: true,
+            domain: 'jeecode.onrender.com', // Frontend domain
+                 sameSite: 'None'
         });
     
         const userDto = new Userdto(user);
@@ -175,11 +183,15 @@ async loginEmail(req, res) {
         res.cookie('refreshToken', refreshToken, {
             maxAge: 1000 * 60 * 60 * 24 * 30,
             httpOnly: true,
+            domain: 'jeecode.onrender.com', // Frontend domain
+                 sameSite: 'None'
         });
 
         res.cookie('accessToken', accessToken, {
             maxAge: 1000 * 60 * 60 * 24 * 30,
             httpOnly: true,
+            domain: 'jeecode.onrender.com', // Frontend domain
+                 sameSite: 'None'
         });
 
         const userdto = new Userdto(user);
@@ -233,11 +245,15 @@ async googleLogin(req, res) {
             res.cookie('refreshToken', refreshToken, {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 httpOnly: true,
+                domain: 'jeecode.onrender.com', // Frontend domain
+                 sameSite: 'None'
             });
 
             res.cookie('accessToken', accessToken, {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 httpOnly: true,
+                domain: 'jeecode.onrender.com', // Frontend domain
+                 sameSite: 'None'
             });
 
             const userDto = new Userdto(user);
@@ -250,11 +266,15 @@ async googleLogin(req, res) {
             res.cookie('refreshToken', refreshToken, {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 httpOnly: true,
+                domain: 'jeecode.onrender.com', // Frontend domain
+                 sameSite: 'None'
             });
 
             res.cookie('accessToken', accessToken, {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 httpOnly: true,
+                domain: 'jeecode.onrender.com', // Frontend domain
+                 sameSite: 'None'
             });
 
             const userDto = new Userdto(user);
