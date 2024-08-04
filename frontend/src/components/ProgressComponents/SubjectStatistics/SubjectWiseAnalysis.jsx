@@ -1,4 +1,4 @@
-import React from 'react'
+import {React,useRef} from 'react'
 import DoughnutChart from '../DoughnutChart/DoughnutChart'
 import styles from './SubjectWiseAnalysis.module.css'
 import RecommendationCard from '../../RecommendationCard/RecommendationCard';
@@ -7,14 +7,21 @@ import { SlChemistry } from "react-icons/sl";
 import { SiReactos } from "react-icons/si";
 import { useNavigate } from 'react-router-dom';
 import { FaArrowCircleRight } from "react-icons/fa";
-
-function SubjectWiseAnalysis({ subject, userInfo,extraInfo }) {
+import SectionPage from '../../../pages/SectionPage/SectionPage';
+const SectionPageContainer=({subject})=>{
+    return(
+        <div className={styles.sectionContainer}>
+            <SectionPage subject={subject} />
+        </div>
+    )
+}
+function SubjectWiseAnalysis({ subject, userInfo,extraInfo,hasSection }) {
     const navigate = useNavigate();
-
+     const sectionRef = useRef(null);
+    console.log(subject);
     const subjectData = subject=='Physics'?userInfo.physics:subject=='Chemistry'?userInfo.chemistry:userInfo.mathematics; 
     const onTopicClick = ()=>{
-        console.log(subject,"clicked")
-        navigate('/section/Physics');
+        sectionRef.current.scrollIntoView({ behavior: 'smooth' });
     } 
 
     const easy = subjectData.easy
@@ -22,14 +29,14 @@ function SubjectWiseAnalysis({ subject, userInfo,extraInfo }) {
     const hard = subjectData.hard 
     const data = [easy, medium,hard]
 
-    const currectQuestions = subjectData.solvedQuestions.length 
-    const incorrectQuestions = subjectData.incorrectQuestions.length
+    const currectQuestions = subjectData.solvedQuestions?subjectData.solvedQuestions.length:0
+    const incorrectQuestions = subjectData.incorrectQuestions?subjectData.incorrectQuestions.length:0
 
     const totalSubmissions = currectQuestions + incorrectQuestions;
-    const accuracy = (currectQuestions / totalSubmissions)*100
+    const accuracy = (currectQuestions / (totalSubmissions==0?1:totalSubmissions))*100
 
     return (
-        
+            <div>
             <div className={styles.mainContainer}>
             <div className={styles.subContainer}>
                 <DoughnutChart
@@ -79,6 +86,10 @@ function SubjectWiseAnalysis({ subject, userInfo,extraInfo }) {
                     </div>
                     }  
             </div>
+        </div>
+        <section className={styles.mainContainer} ref={sectionRef}>
+            {hasSection?<SectionPageContainer subject={subject} />:null}
+        </section>
         </div>
     )
 }
