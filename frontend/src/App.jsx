@@ -15,12 +15,13 @@ import QuestionPage from './pages/QuestionPage/QuestionPage';
 import SubjectPage from './pages/SubjectPage/SubjectPage';
 import SectionPage from './pages/SectionPage/SectionPage';
 import TopicPage from './pages/TopicPage/TopicPage';
+import Loader from './components/Loader/Loader';
 function App() {
   const { loading } = useLoadingWithRefresh();
   const { auth } = useSelector((state) => state.auth);
   console.log(auth);
   return loading ? (
-    <div>loading </div>
+    <div style={{height:"100vh"}}><Loader/></div>
   ) : (
     <BrowserRouter>
       <Routes>

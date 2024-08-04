@@ -6,7 +6,7 @@ import SubjectStatistics from "../../components/ProgressComponents/SubjectStatis
 import { useSelector } from "react-redux";
 import { React, useEffect, useState } from "react";
 import { findUserInfo,findSubmissionInfo } from "../../http";
-
+import Loader from "../../components/Loader/Loader";
 function Progress() {
   const { user } = useSelector((state) => state.auth);
   const userInfoFirst = {
@@ -183,7 +183,7 @@ function Progress() {
   });
 
   return isLoading ? (
-    <div>loading </div>
+    <div style={{height:"100vh"}}><Loader/></div>
   ) : (
   
     <div className={styles.progressPage}>

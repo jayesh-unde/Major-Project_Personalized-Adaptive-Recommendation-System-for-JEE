@@ -92,10 +92,10 @@ const Daily = ({submissions})=>{
 
     function generateWeeklyData(currentDateStr, submissions) {
         const weeklyData = [];
-
+        const date = new Date(currentDateStr);
+        date.setDate(date.getDate() - 7);
         for (let i = 6; i >= 0; i--) {
-            const date = new Date(currentDateStr);
-            date.setDate(date.getDate() - i);
+            date.setDate(date.getDate()+1);
             const dateStr = date.toISOString().split('T')[0];
             const dayName = getDayName(dateStr);
             const { totalQuestions, totalTime } = getTotalQuestionsAndTime(dateStr, submissions);
