@@ -6,6 +6,7 @@ import HomeAfter from './pages/HomeAfter/HomeAfter';
 import Authenticate from './pages/Authenticate/Authenticate';
 import { useLoadingWithRefresh } from './hooks/useLoadingWithRefresh';
 import Progress from './pages/Progress/Progress';
+import Loader from './components/Loader/Loader';
 // import Loader from './components/shared/Loader/Loader';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -20,7 +21,7 @@ function App() {
   const { auth } = useSelector((state) => state.auth);
   console.log(auth);
   return loading ? (
-    <div>loading </div>
+   <div style={{height:"100vh"}}><Loader/></div>
   ) : (
     <BrowserRouter>
       <Routes>
