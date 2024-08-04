@@ -2,8 +2,9 @@ import React from 'react'
 import styles from './SectionPage.module.css'
 import { useParams } from 'react-router-dom';
 import SectionDropDowncard from '../../components/SectionDropDowncard/SectionDropDowncard';
-const SectionPage = () => {
+const SectionPage = ({subject}) => {
   const { subjectName } = useParams();
+  const sub = subject?subject:subjectName;
   const topicsData = {
     Physics: [
       { name: "Mechanics", subtopics: ["Mathematic Tools", "Unit and Dimension", "Fluid", "Kinematics", "Newtons Law of Motion", "Friction", "Circular Motion"] },
@@ -22,13 +23,19 @@ const SectionPage = () => {
   };
   return (
     <div>
-      <div className={styles.heading}>
-        <div style={{ color: "#0C7FDA" }}>
-          {subjectName}
+       {!subject?
+        <div className={styles.heading}>
+          <div style={{ color: "#0C7FDA" }}>
+            {sub}
+          </div>
         </div>
-      </div>
+      :
+        <div style={{margin:"20px 0px"}}>
+          <h2>Sections</h2>
+        </div>
+      }
       <div>
-        <SectionDropDowncard subject={subjectName} topicsData={topicsData} />
+        <SectionDropDowncard subject={sub} topicsData={topicsData} />
       </div>
     </div>
   )
