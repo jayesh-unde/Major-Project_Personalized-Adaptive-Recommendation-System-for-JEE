@@ -132,7 +132,7 @@ class QuestionController {
             if (submission) {
                 // Update existing submission
                 submission.totalAttempts += 1;
-                submission.timeSpent += (timeSpent-submission.timeSpent);
+                submission.timeSpent += timeSpent;
                 submission.optionSelected = optionSelected;
                 await submission.save();
             } else {
