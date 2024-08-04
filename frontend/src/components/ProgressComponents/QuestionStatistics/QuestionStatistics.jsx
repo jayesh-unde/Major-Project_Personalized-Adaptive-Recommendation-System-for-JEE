@@ -5,8 +5,7 @@ import { useEffect } from 'react';
 
 
 
-const Monthly = ({submissions})=>{
-   
+const Monthly = ({ submissions }) => {
     function getTotalQuestionsAndTime(month, year, submissions) {
         const startOfMonth = new Date(`${year}-${month}-01T00:00:00Z`);
         const endOfMonth = new Date(startOfMonth.getFullYear(), startOfMonth.getMonth() + 1, 0, 23, 59, 59, 999).toISOString();
@@ -31,38 +30,37 @@ const Monthly = ({submissions})=>{
         const monthlyData = [];
         const date = new Date(currentDateStr);
         let currentYear = date.getFullYear();
+        let currentMonth = date.getMonth() + 1; // JavaScript months are 0-based, so add 1
 
         for (let i = 0; i < 12; i++) {
-            const month = (date.getMonth() - i + 12) % 12 + 1;
-            if (month==12 && i!=0){
-                currentYear = currentYear - 1;
-            }
-            const monthName = new Date(currentYear, month - 1).toLocaleString('default', { month: 'long' });
+            const month = (currentMonth - i + 12) % 12 || 12;
+            const year = currentMonth - i <= 0 ? currentYear - 1 : currentYear;
+
+            const monthName = new Date(year, month - 1).toLocaleString('default', { month: 'long' });
             const { totalQuestions, totalTime } = getTotalQuestionsAndTime(
                 String(month).padStart(2, '0'),
-                currentYear,
+                year,
                 submissions
             );
 
-            monthlyData.push({ day: monthName, questions: totalQuestions, time: totalTime/60 });
+            monthlyData.push({ day: monthName, questions: totalQuestions, time: totalTime / 60 });
         }
 
         return monthlyData.reverse();
     }
 
-    const currentDateStr = Date.now();
+    const currentDateStr = new Date().toISOString(); // Using current date in ISO format
     const monthlyData = generateMonthlyData(currentDateStr, submissions);
-    const labels = []
-    for(let i=0;i<=11;i++){
-        labels.push(monthlyData[i].day)
-    }
-    return(
+    const labels = monthlyData.map(data => data.day);
+
+    return (
         <div className={styles.barChartContainer}>
-            <BarChart title={'Monthly'} labels={labels} data={monthlyData}/>
+            <BarChart title={'Monthly'} labels={labels} data={monthlyData} />
         </div>
-    )
-}
-const Daily = ({submissions})=>{
+    );
+};
+
+const Daily = ({ submissions }) => {
     function getDayName(date) {
         const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const dayIndex = new Date(date).getDay();
@@ -92,32 +90,31 @@ const Daily = ({submissions})=>{
 
     function generateWeeklyData(currentDateStr, submissions) {
         const weeklyData = [];
+        const currentDate = new Date(currentDateStr);
 
         for (let i = 6; i >= 0; i--) {
-            const date = new Date(currentDateStr);
-            date.setDate(date.getDate() - i);
+            const date = new Date(currentDate);
+            date.setDate(currentDate.getDate() - i);
             const dateStr = date.toISOString().split('T')[0];
             const dayName = getDayName(dateStr);
             const { totalQuestions, totalTime } = getTotalQuestionsAndTime(dateStr, submissions);
 
-            weeklyData.push({ day: dayName, questions: totalQuestions, time: totalTime/60 });
+            weeklyData.push({ day: dayName, questions: totalQuestions, time: totalTime / 60 });
         }
 
         return weeklyData;
     }
 
-    const currentDateStr = Date.now();
+    const currentDateStr = new Date().toISOString(); // Using current date in ISO format
     const weeklyData = generateWeeklyData(currentDateStr, submissions);
-    const labels = []
-    for(let i=0;i<=6;i++){
-        labels.push(weeklyData[i].day)
-    }
-    return(
+    const labels = weeklyData.map(data => data.day);
+
+    return (
         <div className={styles.barChartContainer}>
-            <BarChart title={'Daily'} labels={labels} data={weeklyData}/>
+            <BarChart title={'Daily'} labels={labels} data={weeklyData} />
         </div>
-    )
-}
+    );
+};
 
 const QuestionStatistics = ({userInfo,submissionData}) => {
     const [selectedComponent, setSelectedComponent] = useState('Daily');
