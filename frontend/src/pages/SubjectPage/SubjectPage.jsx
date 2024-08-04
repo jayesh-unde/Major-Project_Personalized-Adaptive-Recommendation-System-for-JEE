@@ -92,6 +92,7 @@ const SubjectPage = () => {
           userInfo={userInfo} 
           extraInfo={{
             recommendedText: "Kinematics",
+            hasSection: true,
           }
           }
         />
