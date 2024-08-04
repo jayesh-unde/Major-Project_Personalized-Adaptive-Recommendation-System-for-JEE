@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import SubjectWiseAnalysis from './SubjectWiseAnalysis';
 import styles from './SubjectStatistics.module.css'
 
-function SubjectStatistics({userInfo, extraInfo}) {
+function SubjectStatistics({userInfo, extraInfo, hasSection}) {
     const [selectedComponent, setSelectedComponent] = useState('Physics');
 
     const renderComponent = ({userInfo}) => {
         switch (selectedComponent) {
             case 'Mathematics':
-                return <SubjectWiseAnalysis subject={'Mathematics'} userInfo={userInfo} extraInfo={extraInfo} />;
+                return <SubjectWiseAnalysis subject={'Mathematics'} userInfo={userInfo} extraInfo={extraInfo} hasSection />;
             case 'Chemistry':
-                return <SubjectWiseAnalysis subject={'Chemistry'} userInfo={userInfo} extraInfo={extraInfo}/>;
+                return <SubjectWiseAnalysis subject={'Chemistry'} userInfo={userInfo} extraInfo={extraInfo} hasSection/>;
             default:
-                return <SubjectWiseAnalysis subject={'Physics'} userInfo={userInfo} extraInfo={extraInfo} />;
+                return <SubjectWiseAnalysis subject={'Physics'} userInfo={userInfo} extraInfo={extraInfo} hasSection/>;
         }
     };
   return (
