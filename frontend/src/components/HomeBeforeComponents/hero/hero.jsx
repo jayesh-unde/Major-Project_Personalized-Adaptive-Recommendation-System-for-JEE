@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setAuth } from '../../../store/authSlice';
@@ -9,13 +9,15 @@ import Image1 from '/images/Rectangle 12.png';
 import Image4 from '/images/Rectangle 13.png';
 import Image3 from '/images/Rectangle 14.png';
 
-
 const Hero = () => {
+  const [loading, setLoading] = useState(false); // State to manage loading status
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleGuestLogin = async () => {
     try {
+      setLoading(true); // Start loading
+
       const email = import.meta.env.VITE_GUEST_EMAIL;
       const password = import.meta.env.VITE_GUEST_PASSWORD;
 
@@ -29,6 +31,8 @@ const Hero = () => {
       }
     } catch (error) {
       console.error('Error during guest login:', error);
+    } finally {
+      setLoading(false); // Stop loading after process is complete
     }
   };
 
@@ -46,8 +50,9 @@ const Hero = () => {
             <button
               className={`${styles.navigate} ${styles.guestButton}`}
               onClick={handleGuestLogin}
+              disabled={loading} // Disable button while loading
             >
-              🧑‍🎓 Login as Guest
+              {loading ? 'Logging in...' : '🧑‍🎓 Login as Guest'}
             </button>
           </div>
         </div>
@@ -64,6 +69,6 @@ const Hero = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Hero;
