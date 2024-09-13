@@ -38,7 +38,7 @@ JEECode offers a unique approach to exam preparation by integrating a machine le
 3. Start the backend server:
     ```bash
     cd backend
-    node index.js
+    node server.js
     ```
 
 4. Start the frontend development server:
