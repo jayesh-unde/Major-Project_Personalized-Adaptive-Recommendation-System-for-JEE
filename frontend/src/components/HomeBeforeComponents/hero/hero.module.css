@@ -115,18 +115,22 @@ img {
     flex-direction: row;
 }
 .guestButton {
-    background-color: #4caf50; /* Example green color */
-    color: white;
+    background-color: #007BFF; /* Your desired color */
+    color: #fff;
     border: none;
     padding: 10px 20px;
-    font-size: 14px;
-    cursor: pointer;
     border-radius: 5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
     transition: background-color 0.3s ease;
   }
   
-  .guestButton:hover {
-    background-color: #45a049; /* Slightly darker green on hover */
+  .guestButton:disabled {
+    background-color: #cccccc; /* Grey out button when loading */
+    cursor: not-allowed; /* Indicate button is disabled */
   }
   
 
