@@ -8,7 +8,7 @@ import { findTopics,findFirstQuestionByTopic } from '../../http';
 import { useNavigate } from 'react-router-dom';
 
 function TopicPage() {
-  const chapterName = "Kinematics"; // Extracting the chapterName from the URL
+  const chapterName = "Indefinite Integration"; // Extracting the chapterName from the URL
   const [topics, setTopics] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -29,7 +29,7 @@ function TopicPage() {
     try {
         const { data } = await findFirstQuestionByTopic({ topic });
         if (data.question) {
-            navigate(`/Kinematics/${data.question._id}`);
+            navigate(`/Integrals/${data.question._id}`);
         }
     } catch (err) {
         console.error('Error fetching first question:', err);

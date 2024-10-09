@@ -1,21 +1,38 @@
 const QuestionModel = require('../models/question-model');
+const JeeQuestionModel = require('../models/jeequestion-model');
 
 class QuestionService {
     async findTopicsByChapter(chapter) {
-        const questions = await QuestionModel.find({ chapter });
-        const topics = [...new Set(questions.map(q => q.topic))];
-        return topics;
+        try {
+            // Find all questions related to the provided chapter
+            const questions = await JeeQuestionModel.find({chapter:chapter}).exec();
+            if (questions.length === 0) {
+                return [];
+            }
+
+            // Extract unique topics from the questions
+            const topics = [...new Set(questions.map(q => q.topic))];
+
+            return topics;
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
     }
 
     async findFirstQuestionByTopic(topic) {
-        const question = await QuestionModel.findOne({ topic })
-            .sort({ points: 1 })
+        const question = await JeeQuestionModel.findOne({ topic })
+            .sort({ Points: 1 })
             .exec();
         return question;
     }
 
     async findQuestionById(questionId) {
-        const question = await QuestionModel.findById(questionId);
+        const question = await JeeQuestionModel.findById(questionId);
+        return question;
+    }
+    async findQuestionId(questionId) {
+        const question = await JeeQuestionModel.findOne({Question_ID: questionId});
         return question;
     }
     async getNextQuestion(currentQuestionId) {

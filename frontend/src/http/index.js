@@ -22,10 +22,12 @@ export const googleLogin = (data) => api.post('/api/google-login', data);
 export const findTopics = (data) => api.post('/api/questions/find-topics', data);
 export const findFirstQuestionByTopic = (data) => api.post('/api/find-first-question', data);
 export const findQuestionById = (data) => api.post('/api/find-question-by-id', data);
+export const findQuestionId = (data) => api.post('/api/find-question-id', data);
 export const nextQuestion = (data) => api.post('/api/next-question',data);
 export const checkAnswer = (data) => api.post('/api/check-answer',data);
 export const findUserInfo = (data) => api.post('/api/find-user-info', data);
 export const findSubmissionInfo = (data) => api.post('/api/find-submission-info', data);
+export const getUserLevel = (data) => api.post('/api/get-user-level', data);
 
 api.interceptors.response.use(
     (config) => {

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { findQuestionById, nextQuestion, checkAnswer } from '../../http';
+import { findQuestionById, nextQuestion, checkAnswer,  getUserLevel,findQuestionId } from '../../http';
 import styles from './QuestionPage.module.css';
 import QuestionCard from '../../components/QuestionComponents/QuestionCard/QuestionCard';
 import Navigation from '../../components/QuestionComponents/Navigation/Navigation';
@@ -24,6 +24,7 @@ const QuestionPage = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const navigate = useNavigate();
   const {user} = useSelector((state) => state.auth); // Assuming user data is stored in Redux
+  const [userLevel, setUserLevel] = useState(null);
 
   const minCardWidth = 300;
 
@@ -39,7 +40,19 @@ const QuestionPage = () => {
 
     fetchQuestion();
   }, [questionId]);
+  useEffect(() => {
+    const fetchUserLevel = async () => {
+      try {
+        const level = await getUserLevel({username: user.name}); // Fetch user level using username
+        console.log(level.data);
+        setUserLevel(level.data); // Update the state with the fetched level
+      } catch (err) {
+        console.error('Error fetching user level:', err);
+      }
+    };
 
+    fetchUserLevel();
+  },[]);
   useEffect(() => {
     const interval = setInterval(() => {
       setTimer((prevTimer) => prevTimer + 1);
@@ -50,11 +63,42 @@ const QuestionPage = () => {
 
   const handleNextClick = async () => {
     try {
-      const { data } = await nextQuestion({ questionId });
+      if (!question) {
+        console.error('No question available.');
+        return;
+      }
+
+  
+      // Step 2: Prepare the payload for the prediction API
+      const predictionPayload = {
+        question: question.Question,
+        points: question.Points,
+        level_student: userLevel,
+        difficulty: question.Difficulty
+      };
+  
+      // Step 3: Make the API request to predict the next question
+      const predictionResponse = await fetch('https://jeecode-ml-server.onrender.com/predict', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(predictionPayload),
+      });
+  
+      const predictionData = await predictionResponse.json();
+      
+      // Step 4: Extract the predicted_question_id from the response
+      const predictedQuestionId = predictionData.predicted_question_id;
+      console.log(predictedQuestionId);
+      // Step 5: Make the API call to findQuestionById using the predicted question id
+      const { data } = await findQuestionId({ questionId: predictedQuestionId });
+  
       if (data.question) {
+        // Step 6: Update the state and navigate to the next question
         setQuestion(data.question);
         setQuestionHistory((prevHistory) => [...prevHistory, questionId]);
-        navigate(`/Kinematics/${data.question._id}`);
+        navigate(`/Integrals/${data.question._id}`);
         setTimer(0); // Reset timer when moving to the next question
         setSelectedOption(''); // Reset selected option for the next question
       } else {
@@ -64,12 +108,13 @@ const QuestionPage = () => {
       console.error('Error fetching next question:', err);
     }
   };
+  
 
   const handlePreviousClick = () => {
     if (questionHistory.length > 0) {
       const previousQuestionId = questionHistory.pop();
       setQuestionHistory([...questionHistory]);
-      navigate(`/Kinematics/${previousQuestionId}`);
+      navigate(`/Integrals/${previousQuestionId}`);
       setTimer(0); // Reset timer when moving to the previous question
       setSelectedOption(''); // Reset selected option for the previous question
     } else {
@@ -162,7 +207,7 @@ const QuestionPage = () => {
       <div className={styles.contentContainer}>
         <div className={styles.questions} style={{ width: dividerX }}>
           {question && (
-            <QuestionCard description={question.description} difficulty={question.difficulty} />
+            <QuestionCard description={question.Question} difficulty={question.Difficulty} />
           )}
         </div>
         <div className={styles.divider} ref={dividerRef} style={{ left: dividerX }} onMouseDown={handleMouseDown}></div>
@@ -170,10 +215,10 @@ const QuestionPage = () => {
           <div className={styles.answersContent}>
             {question && (
               <AnswerCard
-                optionA={question.options.optiona}
-                optionB={question.options.optionb}
-                optionC={question.options.optionc}
-                optionD={question.options.optiond}
+                optionA={question.option1}
+                optionB={question.option2}
+                optionC={question.option3}
+                optionD={question.option4}
                 timer={{
                   hours: Math.floor(timer / 3600),
                   minutes: Math.floor((timer % 3600) / 60),

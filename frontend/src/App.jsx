@@ -37,7 +37,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="/section/:subjectName" element={<SectionPage />} />
         </Route>
-        <Route path="/Kinematics/:questionId" element={<QuestionPage />} />
+        <Route path="/Integrals/:questionId" element={<QuestionPage />} />
         <Route
           path="/authenticate"
           element={<Authenticate />}

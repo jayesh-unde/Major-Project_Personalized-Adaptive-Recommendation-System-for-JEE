@@ -1,23 +1,59 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setAuth } from '../../../store/authSlice';
+import { loginEmail } from '../../../http';
 import styles from './hero.module.css';
 import Image2 from '/images/Rectangle 10.png';
 import Image1 from '/images/Rectangle 12.png';
 import Image4 from '/images/Rectangle 13.png';
 import Image3 from '/images/Rectangle 14.png';
-import Play_Button from '/images/Polygon 1.png';
 
 const Hero = () => {
+  const [loading, setLoading] = useState(false); // State to manage loading status
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleGuestLogin = async () => {
+    try {
+      setLoading(true); // Start loading
+
+      const email = import.meta.env.VITE_GUEST_EMAIL;
+      const password = import.meta.env.VITE_GUEST_PASSWORD;
+
+      const { data } = await loginEmail({ email, password });
+
+      if (data.auth) {
+        dispatch(setAuth(data));
+        navigate('/');
+      } else {
+        console.log('Failed to login as guest.');
+      }
+    } catch (error) {
+      console.error('Error during guest login:', error);
+    } finally {
+      setLoading(false); // Stop loading after process is complete
+    }
+  };
+
   return (
     <div className={styles.hero}>
       <div className={styles.hero_left}>
         <div className={styles.topHeading}>Best Personalized and Adaptive Recommendation Platform</div>
         <div className={styles.Find_Perfect_Path}>Find Your Perfect Path</div>
-        <div className={styles.content}>We tailor study plan based on individual Strengths and weaknesses. You will get recommendations to enhance Learning.</div>
+        <div className={styles.content}>
+          We tailor study plans based on individual strengths and weaknesses. You will get recommendations to enhance Learning.
+        </div>
         <div className={styles.learn}>
           <button className={`${styles.basic} poppins-semibold`}>Get Started</button>
-          <div className={`${styles.Learn_More} poppins-semibold`}>
-            Learn More
-            <button className={`${styles.navigate} ${styles.play}`}><img className={styles.play_button} src={Play_Button} alt="play_button" /></button>
+          <div className={`${styles.guestLogin} poppins-semibold`}>
+            <button
+              className={`${styles.navigate} ${styles.guestButton}`}
+              onClick={handleGuestLogin}
+              disabled={loading} // Disable button while loading
+            >
+              {loading ? 'Logging in...' : '🧑‍🎓 Login as Guest'}
+            </button>
           </div>
         </div>
       </div>
@@ -33,6 +69,6 @@ const Hero = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Hero;

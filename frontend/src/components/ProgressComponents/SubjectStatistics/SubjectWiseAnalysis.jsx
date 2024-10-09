@@ -14,7 +14,7 @@ function SubjectWiseAnalysis({ subject, userInfo,extraInfo }) {
     const subjectData = subject=='Physics'?userInfo.physics:subject=='Chemistry'?userInfo.chemistry:userInfo.mathematics; 
     const onTopicClick = ()=>{
         console.log(subject,"clicked")
-        navigate('/section/Physics');
+        navigate('/section/Mathematics');
     } 
 
     const easy = subjectData.easy

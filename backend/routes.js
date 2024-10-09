@@ -15,10 +15,12 @@ router.post('/api/google-login', authController.googleLogin);
 router.post('/api/questions/find-topics', questionController.findTopics);
 router.post('/api/find-first-question',questionController.findFirstQuestionByTopic);
 router.post('/api/find-question-by-id',questionController.findQuestionById);
+router.post('/api/find-question-id',questionController.findQuestionId);
 router.post('/api/next-question',questionController.getNextQuestion);
 router.post('/api/check-answer',questionController.checkAnswer);
 // router.post('/api/get-topics',dataController.getChapterData);
 router.post('/api/find-user-info', authController.findUserInfo);
 router.post('/api/find-submission-info', questionController.findSubmissionInfo);
+router.post('/api/get-user-level', questionController.getUserLevel);
 
 module.exports = router;

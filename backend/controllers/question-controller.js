@@ -11,8 +11,25 @@ class QuestionController {
         }
 
         try {
+            console.log(chapterName);
             const topics = await QuestionService.findTopicsByChapter(chapterName);
             res.json({ topics });
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ message: 'Error fetching topics' });
+        }
+    }
+
+    async getUserLevel(req, res) {
+        const { username } = req.body;
+        if (!username) {
+            return res.status(400).json({ message: 'username is required' });
+        }
+
+        try {
+            console.log(username);
+            const level = await UserService.findLevelByUser(username);
+            res.json(level);
         } catch (err) {
             console.error(err);
             res.status(500).json({ message: 'Error fetching topics' });
@@ -42,6 +59,21 @@ class QuestionController {
 
         try {
             const question = await QuestionService.findQuestionById(questionId);
+            res.json({ question });
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ message: 'Error fetching question' });
+        }
+    }
+
+    async findQuestionId(req, res) {
+        const { questionId } = req.body;
+        if (!questionId) {
+            return res.status(400).json({ message: 'Question ID is required' });
+        }
+
+        try {
+            const question = await QuestionService.findQuestionId(questionId);
             res.json({ question });
         } catch (err) {
             console.error(err);
