@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './AnswerCard.css';
+import 'katex/dist/katex.min.css';
+import { InlineMath } from 'react-katex';
 
 const AnswerCard = ({ optionA, optionB, optionC, optionD, timer, selectedOption, onOptionChange }) => {
   const { hours, minutes, seconds } = timer;
@@ -8,13 +10,33 @@ const AnswerCard = ({ optionA, optionB, optionC, optionD, timer, selectedOption,
     onOptionChange(e.target.value);
   };
 
+  const renderLatexOption = (text) => {
+    try {
+      const parts = text.split(/(\$[^$]+\$)/g);
+      return parts.map((part, index) => {
+        if (part.startsWith('$') && part.endsWith('$')) {
+          const cleanText = part.slice(1, -1);
+          return <InlineMath key={index} math={cleanText} />;
+        } else if (part.trim()) {
+          return <span key={index}>{part}</span>;
+        }
+        return null;
+      });
+    } catch (error) {
+      console.error('LaTeX parsing error:', error);
+      return <span>{text}</span>;
+    }
+  };
+
   return (
     <div className="answer-card">
       <div className="answer-header">
         <h1>Choose the best option</h1>
         <div className="timer">
           <span className="timer-icon">⏱</span>
-          <span className="timer-text">{`${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`}</span>
+          <span className="timer-text">
+            {`${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`}
+          </span>
         </div>
       </div>
       <div className="answer-content">
@@ -27,7 +49,7 @@ const AnswerCard = ({ optionA, optionB, optionC, optionD, timer, selectedOption,
             checked={selectedOption === 'A'}
             onChange={handleOptionChange}
           />
-          <label htmlFor="option1">{optionA}</label>
+          <label htmlFor="option1">{renderLatexOption(optionA)}</label>
         </div>
         <div className="answer-option">
           <input
@@ -38,7 +60,7 @@ const AnswerCard = ({ optionA, optionB, optionC, optionD, timer, selectedOption,
             checked={selectedOption === 'B'}
             onChange={handleOptionChange}
           />
-          <label htmlFor="option2">{optionB}</label>
+          <label htmlFor="option2">{renderLatexOption(optionB)}</label>
         </div>
         <div className="answer-option">
           <input
@@ -49,7 +71,7 @@ const AnswerCard = ({ optionA, optionB, optionC, optionD, timer, selectedOption,
             checked={selectedOption === 'C'}
             onChange={handleOptionChange}
           />
-          <label htmlFor="option3">{optionC}</label>
+          <label htmlFor="option3">{renderLatexOption(optionC)}</label>
         </div>
         <div className="answer-option">
           <input
@@ -60,7 +82,7 @@ const AnswerCard = ({ optionA, optionB, optionC, optionD, timer, selectedOption,
             checked={selectedOption === 'D'}
             onChange={handleOptionChange}
           />
-          <label htmlFor="option4">{optionD}</label>
+          <label htmlFor="option4">{renderLatexOption(optionD)}</label>
         </div>
       </div>
     </div>

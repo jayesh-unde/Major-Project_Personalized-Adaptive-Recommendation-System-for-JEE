@@ -84,3 +84,22 @@
     font-size: 16px;
     color: rgb(0, 0, 0);
 }
+
+.subject {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #000000;
+    margin-top: 0.8rem;
+    margin-left: 0.5rem;
+}
+
+.subContainerTwo h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #1a1a1a;
+}
+
+.subContainerTwo div {
+    color: #666;
+    line-height: 1.5;
+}

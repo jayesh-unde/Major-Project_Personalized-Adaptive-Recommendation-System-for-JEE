@@ -17,10 +17,10 @@ const { user } = useSelector((state) => state.auth);
         </div>
         <h2>Recommended for you</h2>
         <div className={styles.cardContainer}>
-          <RecommendationCard color="#0163FD" icon={TbMathSymbols}/>
-          <RecommendationCard color="#FD0101" icon={TbMathSymbols}/>
-          <RecommendationCard color="#FD9801" icon={TbMathSymbols}/>
-          <RecommendationCard color="#FD017A" icon={TbMathSymbols}/>
+          <RecommendationCard color="#0163FD" icon={TbMathSymbols} subject="Physics"/>
+          <RecommendationCard color="#FD0101" icon={TbMathSymbols} subject="Chemistry"/>
+          <RecommendationCard color="#FD9801" icon={TbMathSymbols} subject="Mathematics"/>
+          
         </div>
         <br /><br />
         <h2>Recent Activities</h2>

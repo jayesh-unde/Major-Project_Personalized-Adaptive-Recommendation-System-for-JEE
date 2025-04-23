@@ -78,7 +78,7 @@ const QuestionPage = () => {
       };
   
       // Step 3: Make the API request to predict the next question
-      const predictionResponse = await fetch('https://jeecode-ml-server.onrender.com/predict', {
+      const predictionResponse = await fetch('http://127.0.0.1:5000/predict', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
