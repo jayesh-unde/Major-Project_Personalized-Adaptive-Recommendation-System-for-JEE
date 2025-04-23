@@ -3,6 +3,7 @@ const QuestionService = require('../services/question-service');
 const SubmissionModel = require('../models/submission-model');
 
 
+
 class QuestionController {
     async findTopics(req, res) {
         const { chapterName } = req.body;
@@ -126,162 +127,103 @@ class QuestionController {
 
     async checkAnswer(req, res) {
         const { username, questionId, optionSelected, timeSpent } = req.body;
-    
+
         if (!username || !questionId || !optionSelected || timeSpent === undefined) {
             return res.status(400).json({ message: 'Required fields are missing' });
         }
-    
+
         try {
-            // Find user by username
             const user = await UserService.findUser({ name: username });
             if (!user) {
                 return res.status(404).json({ message: 'User not found' });
             }
-    
-            const userId = user._id;
-    
-            // Find the question
+
             const question = await QuestionService.findQuestionById(questionId);
             if (!question) {
                 return res.status(404).json({ message: 'Question not found' });
             }
-    
+
+            const userId = user._id;
             const optionMap = {
-                "A": "optiona",
-                "B": "optionb",
-                "C": "optionc",
-                "D": "optiond"
+                "A": "Option 1",
+                "B": "Option 2",
+                "C": "Option 3",
+                "D": "Option 4"
             };
-    
+
             const selectedOptionField = optionMap[optionSelected];
             if (!selectedOptionField) {
                 return res.status(400).json({ message: 'Invalid option selected' });
             }
-    
-            // Check if submission exists
+
+            // Handle submission
             let submission = await SubmissionModel.findOne({ userId, questionId });
-    
             if (submission) {
-                // Update existing submission
                 submission.totalAttempts += 1;
-                submission.timeSpent += (timeSpent-submission.timeSpent);
+                submission.timeSpent = Math.max(timeSpent, submission.timeSpent);
                 submission.optionSelected = optionSelected;
-                await submission.save();
             } else {
-                // Create new submission
                 submission = new SubmissionModel({
                     userId,
                     questionId,
                     totalAttempts: 1,
                     timeSpent,
-                    optionSelected
+                    optionSelected,
+                    doneStatus: false
                 });
-                await submission.save();
             }
-    
-            // Determine if the answer is correct
-            const correctOption = question.correctAnswer;
+            await submission.save();
+
+            // Check answer correctness
+            const correctOption = question.correct_option;
             const isCorrect = selectedOptionField === correctOption;
-    
-            // Update submission with correct status
-            if (submission.doneStatus === false) {
+
+            if (!submission.doneStatus) {
                 submission.doneStatus = isCorrect;
                 await submission.save();
             }
-    
-            // Update user data
-            const points = question.points;
-            const oldRating = user.rating;
-            const newRating = oldRating + (points * 1.5) / timeSpent;
-    
-            let newLevel = user.level;
+
+            // Update rating and level with validation
+            const points = Number(question.Points) || 0;
+            const oldRating = Number(user.rating) || 0;
+            const safeTimeSpent = Math.max(1, timeSpent); // Prevent division by zero
+            const newRating = Math.max(0, oldRating + (points * 1.5) / safeTimeSpent);
+
+            let newLevel = 0;
             if (newRating >= 10000) {
                 newLevel = 10;
             } else {
                 newLevel = Math.floor(newRating / 1000);
             }
-    
-            const levelUpdated = newLevel !== user.level;
-            if (levelUpdated) {
-                user.level = newLevel;
-                user.levelUpdates.push(new Date());
-            }
-    
-            // Update arrays for universal questions
+
+            // Update user data
             const submissionId = submission._id.toString();
-    
+
+            // Update universal questions tracking
             if (isCorrect) {
-                // Update solved and incorrect questions
-                user.solvedQuestionsUniversal = user.solvedQuestionsUniversal.filter(id => id !== submissionId);
-                user.incorrectQuestionsUniversal = user.incorrectQuestionsUniversal.filter(id => id !== submissionId);
-                if (!user.solvedQuestionsUniversal.includes(submissionId)) {
-                    user.solvedQuestionsUniversal.push(submissionId);
-                }
+                user.solvedQuestionsUniversal = [...new Set([...user.solvedQuestionsUniversal || [], submissionId])];
+                user.incorrectQuestionsUniversal = (user.incorrectQuestionsUniversal || [])
+                    .filter(id => id !== submissionId);
             } else {
-                // Update incorrect and solved questions
-                user.incorrectQuestionsUniversal = user.incorrectQuestionsUniversal.filter(id => id !== submissionId);
-                if (!user.incorrectQuestionsUniversal.includes(submissionId)) {
-                    user.incorrectQuestionsUniversal.push(submissionId);
-                }
+                user.incorrectQuestionsUniversal = [...new Set([...user.incorrectQuestionsUniversal || [], submissionId])];
             }
-    
-            // Update attempted questions
-            
-            user.attempedQuestionsUniversal.push(submissionId);
-            
-    
-            // Update subject-specific data
-            const subject = question.subject.toLowerCase(); // Assuming the question has a subject property
-            if (subject) {
-                const subjectData = user[subject];
-                
-                if (subjectData) {
-                    if (isCorrect) {
-                        // Update solved questions if not already present
-                        if (!user[subject].solvedQuestions.includes(submissionId)) {
-                            user[subject].solvedQuestions.push(submissionId);
-                            switch (question.difficulty) {
-                                case 'Easy':
-                                    user[subject].easy += 1;
-                                    break;
-                                case 'Medium':
-                                    user[subject].medium += 1;
-                                    break;
-                                case 'Hard':
-                                    user[subject].hard += 1;
-                                    break;
-                                default:
-                                    console.warn('Unknown difficulty level:', question.difficulty);
-                            }
-                        }
-                        
-                    } else {
-                        // Update incorrect questions if not already present
-                        if (!user[subject].incorrectQuestions.includes(submissionId)) {
-                            user[subject].incorrectQuestions.push(submissionId);
-                        }
-                    }
-                    // Update attempted questions if not already present
-                    
-                    user[subject].attempedQuestions.push(submissionId);
-                    
-                    
-                }
-            }
-            
+
+            user.attempedQuestionsUniversal = [...new Set([...user.attempedQuestionsUniversal || [], submissionId])];
             user.rating = newRating;
-            console.log(user[subject]);
+            user.level = newLevel;
+
+            if (newLevel !== user.level) {
+                user.levelUpdates = [...(user.levelUpdates || []), new Date()];
+            }
+
             await user.save();
-    
-            // Respond with result
             res.json({ correct: isCorrect });
+
         } catch (err) {
-            console.error(err);
-            res.status(500).json({ message: 'Error processing answer' });
+            console.error('Error in checkAnswer:', err);
+            res.status(500).json({ message: 'Error processing answer', error: err.message });
         }
     }
-    
-    
 }
 
 module.exports = new QuestionController();
